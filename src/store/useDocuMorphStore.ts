@@ -1,5 +1,15 @@
 import { create } from 'zustand';
-import { ApiEndpoint, DocTemplate, ServiceNodeData, TraceEvent, SpanTrace, ServiceTelemetry } from '@/types/documorph';
+import {
+  ApiEndpoint,
+  DocTemplate,
+  ServiceNodeData,
+  TraceEvent,
+  SpanTrace,
+  ServiceTelemetry,
+  CustomNodeType,
+  CustomEdgeType,
+  NodeType,
+} from '@/types/documorph';
 import { SHOWCASE_TEMPLATES } from '@/data/showcaseTemplates';
 
 interface DocuMorphStore {
@@ -23,6 +33,15 @@ interface DocuMorphStore {
   markdownDoc: string;
   setMarkdownDoc: (content: string) => void;
   loadCustomTemplate: (template: DocTemplate) => void;
+
+  // Architecture Diagram Creator & Editor Actions
+  addNode: (nodeType: NodeType, customLabel?: string) => void;
+  deleteNode: (nodeId: string) => void;
+  updateNodeData: (nodeId: string, updates: Partial<ServiceNodeData>) => void;
+  addEdgeConnection: (sourceId: string, targetId: string) => void;
+  deleteEdge: (edgeId: string) => void;
+  generateWithAiPrompt: (prompt: string) => Promise<void>;
+  exportToMermaid: () => string;
 }
 
 const buildInitialSpans = (template: DocTemplate): SpanTrace[] => {
@@ -110,6 +129,208 @@ export const useDocuMorphStore = create<DocuMorphStore>((set, get) => ({
       telemetryList: buildTelemetryList(custom),
     }));
   },
+
+  // Add Node to Canvas
+  addNode: (nodeType: NodeType, customLabel?: string) => {
+    const { activeTemplate } = get();
+    const id = `node-${Date.now()}`;
+    const defaultLabels: Record<NodeType, string> = {
+      gateway: 'API Gateway Proxy',
+      service: 'Compute Microservice',
+      database: 'Relational Database',
+      queue: 'Kafka Event Bus',
+      ai_agent: 'Gemini Agent Brain',
+      auth: 'Auth0 Shield',
+      cache: 'Redis Memory Cache',
+      external_api: 'External Webhook Provider',
+    };
+
+    const label = customLabel || defaultLabels[nodeType] || 'New Service';
+    const xOffset = (activeTemplate.nodes.length % 4) * 280 + 100;
+    const yOffset = Math.floor(activeTemplate.nodes.length / 4) * 220 + 120;
+
+    const newNode: CustomNodeType = {
+      id,
+      type: 'serviceNode',
+      position: { x: xOffset, y: yOffset },
+      data: {
+        id,
+        label,
+        nodeType,
+        description: `Newly provisioned ${nodeType} service ready for living specification and testing.`,
+        techStack: nodeType === 'cache' ? ['Redis', 'In-Memory'] : nodeType === 'database' ? ['PostgreSQL', 'Prisma'] : ['TypeScript', 'Node.js'],
+        status: 'operational',
+        latency: nodeType === 'cache' ? '2ms' : '15ms',
+        sla: '99.9%',
+        endpoints: [
+          {
+            id: `ep-${id}`,
+            name: `Query ${label}`,
+            method: nodeType === 'database' || nodeType === 'cache' ? 'GET' : 'POST',
+            path: `/api/v1/${nodeType}/${id.slice(-4)}`,
+            summary: `Automated test route for ${label}`,
+            description: `Interactively testable endpoint in DocuMorph sandbox.`,
+            mockResponse: {
+              status: 200,
+              statusText: 'OK',
+              headers: { 'content-type': 'application/json' },
+              body: { success: true, node: label, timestamp: Date.now() },
+            },
+          },
+        ],
+      },
+    };
+
+    const updatedTemplate = {
+      ...activeTemplate,
+      nodes: [...activeTemplate.nodes, newNode],
+    };
+
+    set({
+      activeTemplate: updatedTemplate,
+      selectedNode: newNode.data,
+      selectedEndpoint: newNode.data.endpoints[0],
+      telemetryList: buildTelemetryList(updatedTemplate),
+    });
+  },
+
+  // Delete Node from Canvas
+  deleteNode: (nodeId: string) => {
+    const { activeTemplate, selectedNode } = get();
+    const updatedNodes = activeTemplate.nodes.filter((n) => n.id !== nodeId);
+    const updatedEdges = activeTemplate.edges.filter((e) => e.source !== nodeId && e.target !== nodeId);
+
+    const updatedTemplate = {
+      ...activeTemplate,
+      nodes: updatedNodes,
+      edges: updatedEdges,
+    };
+
+    set({
+      activeTemplate: updatedTemplate,
+      selectedNode: selectedNode?.id === nodeId ? updatedNodes[0]?.data || null : selectedNode,
+      telemetryList: buildTelemetryList(updatedTemplate),
+    });
+  },
+
+  // Update Node Data
+  updateNodeData: (nodeId: string, updates: Partial<ServiceNodeData>) => {
+    const { activeTemplate, selectedNode } = get();
+    const updatedNodes = activeTemplate.nodes.map((n) => {
+      if (n.id === nodeId) {
+        return {
+          ...n,
+          data: { ...n.data, ...updates },
+        };
+      }
+      return n;
+    });
+
+    const updatedTemplate = {
+      ...activeTemplate,
+      nodes: updatedNodes,
+    };
+
+    const updatedSelectedNode = selectedNode?.id === nodeId ? { ...selectedNode, ...updates } : selectedNode;
+
+    set({
+      activeTemplate: updatedTemplate,
+      selectedNode: updatedSelectedNode,
+    });
+  },
+
+  // Add Edge Connection
+  addEdgeConnection: (sourceId: string, targetId: string) => {
+    const { activeTemplate } = get();
+    if (sourceId === targetId) return;
+
+    // Check if edge already exists
+    const exists = activeTemplate.edges.some((e) => e.source === sourceId && e.target === targetId);
+    if (exists) return;
+
+    const sourceNode = activeTemplate.nodes.find((n) => n.id === sourceId);
+    const targetNode = activeTemplate.nodes.find((n) => n.id === targetId);
+
+    const newEdge: CustomEdgeType = {
+      id: `edge-${sourceId}-${targetId}`,
+      source: sourceId,
+      target: targetId,
+      animated: true,
+      label: `${sourceNode?.data.label || 'source'} ➔ ${targetNode?.data.label || 'target'}`,
+    };
+
+    set({
+      activeTemplate: {
+        ...activeTemplate,
+        edges: [...activeTemplate.edges, newEdge],
+      },
+    });
+  },
+
+  // Delete Edge
+  deleteEdge: (edgeId: string) => {
+    const { activeTemplate } = get();
+    set({
+      activeTemplate: {
+        ...activeTemplate,
+        edges: activeTemplate.edges.filter((e) => e.id !== edgeId),
+      },
+    });
+  },
+
+  // AI Prompt Architecture Generator
+  generateWithAiPrompt: async (prompt: string) => {
+    const { activeTemplate, addNode, addEdgeConnection } = get();
+    const lower = prompt.toLowerCase();
+
+    if (lower.includes('cache') || lower.includes('redis')) {
+      addNode('cache', 'Redis Distributed Cache');
+      const lastNode = get().activeTemplate.nodes[get().activeTemplate.nodes.length - 1];
+      const gatewayNode = activeTemplate.nodes.find((n) => n.data.nodeType === 'gateway');
+      if (gatewayNode && lastNode) {
+        addEdgeConnection(gatewayNode.id, lastNode.id);
+      }
+    } else if (lower.includes('auth') || lower.includes('security')) {
+      addNode('auth', 'OAuth2 / JWT Verifier');
+      const lastNode = get().activeTemplate.nodes[get().activeTemplate.nodes.length - 1];
+      const gatewayNode = activeTemplate.nodes.find((n) => n.data.nodeType === 'gateway');
+      if (gatewayNode && lastNode) {
+        addEdgeConnection(gatewayNode.id, lastNode.id);
+      }
+    } else if (lower.includes('queue') || lower.includes('kafka') || lower.includes('event')) {
+      addNode('queue', 'RabbitMQ Event Stream');
+      const lastNode = get().activeTemplate.nodes[get().activeTemplate.nodes.length - 1];
+      const serviceNode = activeTemplate.nodes.find((n) => n.data.nodeType === 'service');
+      if (serviceNode && lastNode) {
+        addEdgeConnection(serviceNode.id, lastNode.id);
+      }
+    } else {
+      addNode('service', 'Worker Microservice');
+      const lastNode = get().activeTemplate.nodes[get().activeTemplate.nodes.length - 1];
+      const firstNode = activeTemplate.nodes[0];
+      if (firstNode && lastNode) {
+        addEdgeConnection(firstNode.id, lastNode.id);
+      }
+    }
+  },
+
+  // Export current graph to Mermaid.js diagram code
+  exportToMermaid: () => {
+    const { activeTemplate } = get();
+    let mermaid = 'graph TD\n';
+
+    activeTemplate.nodes.forEach((n) => {
+      mermaid += `  ${n.id}["${n.data.label} (${n.data.nodeType})"]\n`;
+    });
+
+    activeTemplate.edges.forEach((e) => {
+      const label = typeof e.label === 'string' ? `|${e.label}|` : '';
+      mermaid += `  ${e.source} -->${label} ${e.target}\n`;
+    });
+
+    return mermaid;
+  },
+
   runEndpointSimulation: async (endpoint: ApiEndpoint) => {
     set({ isSimulating: true });
     const { activeTemplate, addTraceEvent } = get();
