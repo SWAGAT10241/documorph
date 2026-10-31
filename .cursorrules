@@ -1,0 +1,16 @@
+# Cursor Rules for DocuMorph
+# See full engineering standards and architectural rules in GEMINI.md
+
+Please follow all instructions defined in GEMINI.md:
+- Feature-driven folder structure (src/features/<feature>/)
+- Separate business logic from UI components via custom hooks and services
+- Remove duplicate and dead code
+- Use consistent naming conventions (PascalCase components, camelCase functions/hooks)
+- Robust error handling with user-facing fallbacks
+- Separate environment configs via Zod schema (zero hardcoded secrets)
+- Modular reusable components (< 250 lines)
+- Predictable Zustand state management without cascading useEffect setStates
+- Document codebase with TSDoc and maintain ARCHITECTURE.md & AGENTS.md
+- Scalable versioned API routes with standard response envelope
+- Runtime validation with Zod
+- Verification gates: ensure `pnpm tsc --noEmit && pnpm lint && pnpm build` pass cleanly
