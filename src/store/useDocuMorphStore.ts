@@ -20,8 +20,8 @@ interface DocuMorphStore {
   setSelectedNode: (node: ServiceNodeData | null) => void;
   selectedEndpoint: ApiEndpoint | null;
   setSelectedEndpoint: (endpoint: ApiEndpoint | null) => void;
-  activeTab: 'diagram' | 'editor' | 'playground' | 'metrics' | 'copilot';
-  setActiveTab: (tab: 'diagram' | 'editor' | 'playground' | 'metrics' | 'copilot') => void;
+  activeTab: 'diagram' | 'hologram3d' | 'editor' | 'playground' | 'metrics' | 'copilot';
+  setActiveTab: (tab: 'diagram' | 'hologram3d' | 'editor' | 'playground' | 'metrics' | 'copilot') => void;
   isSimulating: boolean;
   activeSimulatedEdgeId: string | null;
   traceEvents: TraceEvent[];

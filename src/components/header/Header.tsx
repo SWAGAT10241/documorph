@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useDocuMorphStore } from '@/store/useDocuMorphStore';
 import {
   Layers,
+  Box,
   Upload,
   Play,
   FileText,
@@ -131,6 +132,18 @@ export const Header: React.FC = () => {
           >
             <Layers className="w-3.5 h-3.5" />
             <span className="hidden md:inline">Living Architecture</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('hologram3d')}
+            className={`flex items-center space-x-1.5 px-3 py-1 rounded-lg text-xs font-semibold transition ${
+              activeTab === 'hologram3d'
+                ? 'bg-gradient-to-r from-cyan-600 to-indigo-600 text-white shadow-md shadow-cyan-600/30'
+                : 'text-slate-400 hover:text-cyan-300 hover:bg-slate-900'
+            }`}
+          >
+            <Box className={`w-3.5 h-3.5 ${activeTab === 'hologram3d' ? 'text-cyan-300 animate-pulse' : 'text-cyan-400'}`} />
+            <span className="hidden md:inline">3D Hologram</span>
           </button>
 
           <button
