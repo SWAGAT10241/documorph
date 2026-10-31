@@ -1,0 +1,212 @@
+{
+  ".github/workflows/ci.yml": {
+    "mtime": 1793425243.014816,
+    "seen": 1793426118.8581781,
+    "ast_hash": "837bccef0c47590df560209b11746582",
+    "semantic_hash": ""
+  },
+  ".github/workflows/security.yml": {
+    "mtime": 1793425262.34598,
+    "seen": 1793426118.8581812,
+    "ast_hash": "1c2ea0fb4fbd3c26db6f1a5dafd76f68",
+    "semantic_hash": ""
+  },
+  "eslint.config.mjs": {
+    "mtime": 1793423095.7781382,
+    "seen": 1793426118.8581839,
+    "ast_hash": "dfa1f5f6a7037bf39dc510f30b180002",
+    "semantic_hash": ""
+  },
+  "next.config.ts": {
+    "mtime": 1793423095.7785459,
+    "seen": 1793426118.858185,
+    "ast_hash": "59ace8843cd0f04a4328b2189aead87b",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1793425628.2315953,
+    "seen": 1793426118.858186,
+    "ast_hash": "b1a145df010712afae45fbfece721069",
+    "semantic_hash": ""
+  },
+  "pnpm-workspace.yaml": {
+    "mtime": 1793423095.7791045,
+    "seen": 1793426118.858187,
+    "ast_hash": "a800062e52322b626879a0760092d845",
+    "semantic_hash": ""
+  },
+  "src/app/layout.tsx": {
+    "mtime": 1793423095.7811754,
+    "seen": 1793426118.858188,
+    "ast_hash": "c50870979b1edd2a1c6ae21988561fe1",
+    "semantic_hash": ""
+  },
+  "src/app/page.tsx": {
+    "mtime": 1793424079.0367498,
+    "seen": 1793426118.858189,
+    "ast_hash": "0c250667e11eb954022cd5a8ec8d7d81",
+    "semantic_hash": ""
+  },
+  "src/components/canvas/ArchitectureCanvas.tsx": {
+    "mtime": 1793425516.30899,
+    "seen": 1793426118.85819,
+    "ast_hash": "4627f6c733de292eaf52a23afe522773",
+    "semantic_hash": ""
+  },
+  "src/components/canvas/ServiceNode.tsx": {
+    "mtime": 1793423095.7853897,
+    "seen": 1793426118.858191,
+    "ast_hash": "cabdb9cc212abb54b0fd9b1fd4c11717",
+    "semantic_hash": ""
+  },
+  "src/components/copilot/MultimodalCopilot.tsx": {
+    "mtime": 1793425522.35801,
+    "seen": 1793426118.858192,
+    "ast_hash": "affe78430458740aa80fb3aaf7e7d0e4",
+    "semantic_hash": ""
+  },
+  "src/components/editor/DocEditor.tsx": {
+    "mtime": 1793425528.6625245,
+    "seen": 1793426118.858193,
+    "ast_hash": "a4bbf52137cbbee62dd075ca29d9ca81",
+    "semantic_hash": ""
+  },
+  "src/components/header/Header.tsx": {
+    "mtime": 1793425545.2617962,
+    "seen": 1793426118.8581939,
+    "ast_hash": "9a48b9c30da1905f13d203c3bc8d50c5",
+    "semantic_hash": ""
+  },
+  "src/components/inspector/NodeInspector.tsx": {
+    "mtime": 1793425472.0152237,
+    "seen": 1793426118.8581948,
+    "ast_hash": "31513ed86826c614415ea5b797443178",
+    "semantic_hash": ""
+  },
+  "src/components/observability/MetricsDashboard.tsx": {
+    "mtime": 1793425551.5619242,
+    "seen": 1793426118.858196,
+    "ast_hash": "02261e6a671a4decf26a4c94030a2f3d",
+    "semantic_hash": ""
+  },
+  "src/components/playground/ApiPlayground.tsx": {
+    "mtime": 1793425430.9270892,
+    "seen": 1793426118.858197,
+    "ast_hash": "d90984d2348a43b37d46f78e8054e4b2",
+    "semantic_hash": ""
+  },
+  "src/data/showcaseTemplates.ts": {
+    "mtime": 1793423095.7884758,
+    "seen": 1793426118.858198,
+    "ast_hash": "921b9ad96cdc213f1ea6871062e44a26",
+    "semantic_hash": ""
+  },
+  "src/store/useDocuMorphStore.ts": {
+    "mtime": 1793424879.7435167,
+    "seen": 1793426118.8581991,
+    "ast_hash": "d77bf8783216002ac10ef47e3838466a",
+    "semantic_hash": ""
+  },
+  "src/types/documorph.ts": {
+    "mtime": 1793425409.0095718,
+    "seen": 1793426118.8582,
+    "ast_hash": "13faa213d154736020b5efdb3116b3f9",
+    "semantic_hash": ""
+  },
+  "tsconfig.json": {
+    "mtime": 1793423095.7369263,
+    "seen": 1793426118.858201,
+    "ast_hash": "ee17fd1c97c735e9f3564e3f5251f125",
+    "semantic_hash": ""
+  },
+  ".github/ISSUE_TEMPLATE/bug_report.md": {
+    "mtime": 1793425361.3278909,
+    "seen": 1793426118.8582022,
+    "ast_hash": "11758e96606cac9a1140752a4a3833f2",
+    "semantic_hash": ""
+  },
+  ".github/ISSUE_TEMPLATE/feature_request.md": {
+    "mtime": 1793425366.9379034,
+    "seen": 1793426118.858203,
+    "ast_hash": "5eb800f0d6ac9ed617148cb3902bd8b0",
+    "semantic_hash": ""
+  },
+  ".github/PULL_REQUEST_TEMPLATE.md": {
+    "mtime": 1793425349.085349,
+    "seen": 1793426118.858204,
+    "ast_hash": "4806fcd55b3a83553b0aa683195f6dcb",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1793423095.7372923,
+    "seen": 1793426118.8582048,
+    "ast_hash": "c98dbebb744eadc1acc4b9f58bfe0f42",
+    "semantic_hash": ""
+  },
+  "ARCHITECTURE.md": {
+    "mtime": 1793425329.9409537,
+    "seen": 1793426118.858206,
+    "ast_hash": "2bf73f93c7fefc5348845d860a728676",
+    "semantic_hash": ""
+  },
+  "CODE_OF_CONDUCT.md": {
+    "mtime": 1793425314.4300914,
+    "seen": 1793426118.858207,
+    "ast_hash": "e7c6ef5952f48fc84f73519bbfc66c8a",
+    "semantic_hash": ""
+  },
+  "CONTRIBUTING.md": {
+    "mtime": 1793425283.5505815,
+    "seen": 1793426118.858208,
+    "ast_hash": "c7a39101071c924f78c38d696bd7f835",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1793425384.1436846,
+    "seen": 1793426118.8582091,
+    "ast_hash": "5ae5e9308bd65affdfab732999cfaf1d",
+    "semantic_hash": ""
+  },
+  "SECURITY.md": {
+    "mtime": 1793425273.287982,
+    "seen": 1793426118.85821,
+    "ast_hash": "d567e52cc878b4acd8db22d402b6accb",
+    "semantic_hash": ""
+  },
+  "public/file.svg": {
+    "mtime": 1793423095.7342098,
+    "seen": 1793426118.858212,
+    "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
+    "semantic_hash": ""
+  },
+  "public/globe.svg": {
+    "mtime": 1793423095.7354765,
+    "seen": 1793426118.858212,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": ""
+  },
+  "public/next.svg": {
+    "mtime": 1793423095.7351847,
+    "seen": 1793426118.858214,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": ""
+  },
+  "public/vercel.svg": {
+    "mtime": 1793423095.7345698,
+    "seen": 1793426118.8582149,
+    "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
+    "semantic_hash": ""
+  },
+  "public/window.svg": {
+    "mtime": 1793423095.7358007,
+    "seen": 1793426118.858216,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": ""
+  },
+  "pnpm-lock.yaml": {
+    "mtime": 1793423036.353342,
+    "seen": 1793426118.858217,
+    "ast_hash": "12497dffeb66a195eb074af7fb4a2183",
+    "semantic_hash": ""
+  }
+}
