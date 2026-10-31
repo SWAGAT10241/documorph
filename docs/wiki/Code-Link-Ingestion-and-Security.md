@@ -26,9 +26,9 @@ sequenceDiagram
         Sec-->>UI: HTTP 400 Prohibited Host / SSRF Detected
     end
     API->>GH: Fetch Repo Metadata & Git Tree (8s timeout)
-    GH-->>API: Repository AST & File Paths
-    API->>API: Detect Frameworks, Microservices & Endpoints
-    API->>Sec: Sanitize All Strings against XSS
+    GH-->>API: Repository Metadata & Git Tree with File Paths
+    API->>API: Analyze Technology & Endpoints using Path and Name Heuristics
+    API->>Sec: Sanitize Selected Extracted Strings
     API-->>UI: HTTP 200 OK with Synthesized DocTemplate
     UI->>UI: Auto-Render 2D Canvas & 3D Hologram
 ```
@@ -51,7 +51,13 @@ To prevent Server-Side Request Forgery (SSRF) into cloud metadata or internal mi
 1. **Protocol:** Must strictly be `https:`.
 2. **Host Whitelist:** Exclusively `github.com` or `raw.githubusercontent.com`.
 3. **Blocked Hostnames:** `localhost`, `127.0.0.1`, `0.0.0.0`, `::1`, `169.254.169.254`, `metadata.google.internal`.
-4. **Private IP Ranges:** Rejects any IP resolves targeting `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `127.0.0.0/8`, `fc00::/7`, `fe80::/10`.
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:afacced093fd73d957493a62acbd8891f8dd46e30b8527c03e8a77ca67c1d40a -->
+
+4. **Private IP Patterns:** `validateAndParseGitHubUrl` checks the parsed hostname string against patterns for `10.`, `172.16.` through `172.31.`, `192.168.`, `127.`, `fc00:`, and `fe80:`. It does not resolve hostnames through DNS or inspect resolved addresses.
+
+<!-- /coderabbit-ai-generated:v1 -->
 5. **Credential Stripping:** Rejects URLs containing embedded basic auth (`user:pass@host`).
 6. **Identifier Sanitization:** Owner and repo names must match `^[a-zA-Z0-9_.-]+$`.
 
@@ -67,33 +73,54 @@ const IngestRequestSchema = z.object({
 ```
 
 ### D. XSS & Content Scrubbing (`src/lib/security/sanitizer.ts`)
-Cleanses all extracted strings before injecting into the React state store or Monaco editor:
-- Strips `<script>` and `<iframe>` tags.
-- Removes `javascript:` pseudo-protocols.
-- Strips event handlers (`onload=`, `onerror=`, `onclick=`).
-- Escapes unclosed HTML brackets.
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:193b61969298d3bf746bd24278b9465ed0e10a2e7f9d975f4792e4f08ab3152b -->
+
+`sanitizeString` attempts to remove `javascript:`, `data:`, and `vbscript:` text, rewrite word-initial `on` prefixes, escape `&`, `<`, `>`, double quotes, and single quotes, and trim whitespace. It does not parse or remove HTML elements or attributes.
+
+The replacement loop repeatedly escapes ampersands, so inputs containing or producing an ampersand do not terminate.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 ### E. Timeout Protection
-Sets an `AbortController` timeout of **8,000 ms** on all external GitHub API calls to prevent slowloris connection-holding attacks.
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:49c7de64618bd3c32b25a0d2b1f4c8d5e61267558f1c32c672a1f3a7ca732356 -->
+
+An `AbortController` uses a shared **8,000 ms** timeout for the outbound GitHub API calls. It starts after the request body is read and does not cover slow client request-body uploads.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 ---
 
 ## 3. Technology & Framework Detection Rules
 
-The ingestion engine analyzes repository trees and dependency manifests to automatically recognize:
-- **Frontend:** Next.js, React, Vue.js, Nuxt, Tailwind CSS.
-- **Backend:** Express.js, Fastify, NestJS, FastAPI, Django, Flask, Gin.
-- **Persistence:** PostgreSQL, MongoDB, Prisma ORM, Drizzle ORM, TypeORM, Mongoose.
-- **In-Memory & Cache:** Redis, Memcached.
-- **Message Brokers:** Apache Kafka, RabbitMQ, BullMQ, AWS SQS.
-- **AI & LLMs:** Google Gemini, Gemma, LangChain, OpenAI, LlamaIndex.
-- **DevOps:** Docker, Kubernetes, GitHub Actions CI/CD.
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:7991bf2c85d30a0c498c4a95d3c0b8f121a8f09cf52e1b3362bb9d56084c4e25 -->
+
+The ingestion engine uses repository metadata and file-path heuristics to emit the repository language and these labels:
+- **Frontend:** Next.js or React, Vue.js, Tailwind CSS. A Nuxt configuration contributes to Vue.js detection.
+- **Backend:** Express.js, FastAPI.
+- **Persistence:** PostgreSQL, MongoDB, Prisma ORM, Drizzle ORM. A Mongoose path contributes to MongoDB detection.
+- **In-Memory & Cache:** Redis Cache.
+- **AI & LLMs:** AI / LLM Integration.
+- **DevOps:** Docker.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 ---
 
 ## 4. API Endpoints Extraction
 
 Scans routes under `/app/api/**`, `/api/**`, `/routes/**`, and `/controllers/**`, extracting:
-- HTTP Methods (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`).
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:9036d9769c2d30ed07b5e4e2f8f44cf75ef5e6d0c9797395f389e59ecd328e58 -->
+
+- HTTP method inferred from the normalized path: `POST` if it contains `create`, `auth`, or `post`; otherwise `GET`.
+
+<!-- /coderabbit-ai-generated:v1 -->
 - Standardized route paths (e.g. `/api/v1/projects`, `/api/auth/session`).
 - Creates interactive mock payloads ready for testing in the living sandbox!
