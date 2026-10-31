@@ -11,13 +11,21 @@ export function sanitizeString(input: unknown): string {
     return '';
   }
 
-  return input
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // remove script tags
-    .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '') // remove iframe tags
-    .replace(/javascript:/gi, '') // remove javascript pseudo-protocol
-    .replace(/on\w+\s*=/gi, '') // remove event handlers like onload=, onclick=
-    .replace(/[<>]/g, (char) => (char === '<' ? '&lt;' : '&gt;')) // escape remaining brackets
-    .trim();
+  let previous: string;
+  let sanitized = input;
+
+  do {
+    previous = sanitized;
+    sanitized = sanitized
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // remove script tags
+      .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '') // remove iframe tags
+      .replace(/javascript:/gi, '') // remove javascript pseudo-protocol
+      .replace(/on\w+\s*=/gi, '') // remove event handlers like onload=, onclick=
+      .replace(/[<>]/g, (char) => (char === '<' ? '&lt;' : '&gt;')) // escape remaining brackets
+      .trim();
+  } while (sanitized !== previous);
+
+  return sanitized;
 }
 
 /**
