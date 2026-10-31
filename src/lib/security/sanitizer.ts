@@ -17,7 +17,7 @@ export function sanitizeString(input: unknown): string {
   do {
     previous = sanitized;
     sanitized = sanitized
-      .replace(/javascript:/gi, '') // remove javascript pseudo-protocol
+      .replace(/(?:javascript|data|vbscript):/gi, '') // remove executable pseudo-protocols
       .replace(/\bon/gi, '&#111;n') // neutralize event-handler attribute prefixes (on*)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
