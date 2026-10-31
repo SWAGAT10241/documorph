@@ -6,6 +6,7 @@ import { ArchitectureCanvas } from '@/components/canvas/ArchitectureCanvas';
 import { NodeInspector } from '@/components/inspector/NodeInspector';
 import { ApiPlayground } from '@/components/playground/ApiPlayground';
 import { DocEditor } from '@/components/editor/DocEditor';
+import { MetricsDashboard } from '@/components/observability/MetricsDashboard';
 import { MultimodalCopilot } from '@/components/copilot/MultimodalCopilot';
 import { useDocuMorphStore } from '@/store/useDocuMorphStore';
 
@@ -36,6 +37,12 @@ export default function Home() {
         {activeTab === 'playground' && (
           <div className="flex-1 h-full">
             <ApiPlayground />
+          </div>
+        )}
+
+        {activeTab === 'metrics' && (
+          <div className="flex-1 h-full">
+            <MetricsDashboard />
           </div>
         )}
 

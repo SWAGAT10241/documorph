@@ -57,6 +57,27 @@ export interface TraceEvent {
   message: string;
 }
 
+export interface SpanTrace {
+  id: string;
+  name: string;
+  service: string;
+  durationMs: number;
+  offsetMs: number;
+  status: 'ok' | 'error' | 'pending';
+  tags: Record<string, string>;
+}
+
+export interface ServiceTelemetry {
+  serviceId: string;
+  serviceName: string;
+  rps: number;
+  p95LatencyMs: number;
+  errorRate: number;
+  cpuPercent: number;
+  memoryMb: number;
+  status: 'healthy' | 'warning' | 'critical';
+}
+
 export type CustomNodeType = Node<ServiceNodeData>;
 export type CustomEdgeType = Edge;
 

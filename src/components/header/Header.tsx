@@ -11,6 +11,7 @@ import {
   Bot,
   Sparkles,
   ChevronDown,
+  BarChart3,
   X,
 } from 'lucide-react';
 
@@ -143,6 +144,18 @@ export const Header: React.FC = () => {
           >
             <Play className="w-3.5 h-3.5" />
             <span className="hidden md:inline">API Sandbox</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('metrics')}
+            className={`flex items-center space-x-1.5 px-3 py-1 rounded-lg text-xs font-semibold transition ${
+              activeTab === 'metrics'
+                ? 'bg-orange-600 text-white shadow-md shadow-orange-600/30'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <BarChart3 className="w-3.5 h-3.5 text-orange-400" />
+            <span className="hidden md:inline">Grafana View</span>
           </button>
 
           <button
