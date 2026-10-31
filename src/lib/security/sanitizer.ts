@@ -17,11 +17,13 @@ export function sanitizeString(input: unknown): string {
   do {
     previous = sanitized;
     sanitized = sanitized
-      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // remove script tags
-      .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '') // remove iframe tags
       .replace(/javascript:/gi, '') // remove javascript pseudo-protocol
       .replace(/\bon/gi, '&#111;n') // neutralize event-handler attribute prefixes (on*)
-      .replace(/[<>]/g, (char) => (char === '<' ? '&lt;' : '&gt;')) // escape remaining brackets
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
       .trim();
   } while (sanitized !== previous);
 
