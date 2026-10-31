@@ -85,11 +85,11 @@ export const CyberGridBackground3D: React.FC = () => {
 
     // Animation Loop
     let animId: number;
-    const clock = new THREE.Clock();
+    const startTime = performance.now();
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
+      const t = (performance.now() - startTime) * 0.001;
       const posAttr = geometry.attributes.position as THREE.BufferAttribute;
       const array = posAttr.array as Float32Array;
 

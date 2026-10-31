@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import { useDocuMorphStore } from '@/store/useDocuMorphStore';
+import { CodeLinkModal } from '@/components/ingest/CodeLinkModal';
 import {
   Layers,
   Box,
+  Link2,
   Upload,
   Play,
   FileText,
@@ -26,6 +28,7 @@ export const Header: React.FC = () => {
   } = useDocuMorphStore();
 
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isCodeLinkModalOpen, setIsCodeLinkModalOpen] = useState(false);
   const [customTitle, setCustomTitle] = useState('');
   const [customMarkdown, setCustomMarkdown] = useState('');
 
@@ -198,14 +201,28 @@ export const Header: React.FC = () => {
         {/* Right: Ingest CTA & Hackathon Badge */}
         <div className="flex items-center space-x-2">
           <button
+            onClick={() => setIsCodeLinkModalOpen(true)}
+            className="flex items-center space-x-1.5 bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white px-3 py-1.5 rounded-lg text-xs font-semibold transition border border-cyan-400/30 shadow-md shadow-cyan-950/40"
+          >
+            <Link2 className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Ingest Code Link</span>
+          </button>
+
+          <button
             onClick={() => setIsUploadModalOpen(true)}
             className="flex items-center space-x-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition border border-slate-700"
           >
             <Upload className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Ingest Spec</span>
+            <span className="hidden sm:inline">Manual Spec</span>
           </button>
         </div>
       </header>
+
+      {/* Code Link Ingest Modal */}
+      <CodeLinkModal
+        isOpen={isCodeLinkModalOpen}
+        onClose={() => setIsCodeLinkModalOpen(false)}
+      />
 
       {/* Ingest Spec Modal */}
       {isUploadModalOpen && (

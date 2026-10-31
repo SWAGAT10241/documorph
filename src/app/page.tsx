@@ -9,8 +9,12 @@ import { ApiPlayground } from '@/components/playground/ApiPlayground';
 import { DocEditor } from '@/components/editor/DocEditor';
 import { MetricsDashboard } from '@/components/observability/MetricsDashboard';
 import { MultimodalCopilot } from '@/components/copilot/MultimodalCopilot';
-import { CyberGridBackground3D } from '@/components/canvas3d/CyberGridBackground3D';
 import { useDocuMorphStore } from '@/store/useDocuMorphStore';
+
+const CyberGridBackground3D = dynamic(
+  () => import('@/components/canvas3d/CyberGridBackground3D').then((mod) => mod.CyberGridBackground3D),
+  { ssr: false }
+);
 
 const HologramCanvas3D = dynamic(
   () => import('@/components/canvas3d/HologramCanvas3D').then((mod) => mod.HologramCanvas3D),

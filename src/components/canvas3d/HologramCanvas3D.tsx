@@ -452,11 +452,11 @@ export const HologramCanvas3D: React.FC = () => {
 
     // Animation Render Loop
     let animationFrameId: number;
-    const clock = new THREE.Clock();
+    const startTime = performance.now();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = (performance.now() - startTime) * 0.001;
       const burstMultiplier = burstActiveRef.current ? 4.0 : 1.0;
 
       // Rotate Background Starfield

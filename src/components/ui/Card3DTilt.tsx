@@ -27,6 +27,10 @@ export const Card3DTilt: React.FC<Card3DTiltProps> = ({
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -66,7 +70,7 @@ export const Card3DTilt: React.FC<Card3DTiltProps> = ({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={style}
+      style={{ ...props.style, ...style }}
       className={clsx(
         'relative transform-gpu will-change-transform rounded-xl overflow-hidden',
         className
