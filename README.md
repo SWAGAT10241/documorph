@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📘 DocuMorph: Multimodal Living Documentation & Interactive API Playground
 
-## Getting Started
+> **Built for Global Hack Week: Builders Week (MLH, Nov 6–12)**  
+> *Transform static technical documentation, architecture specs, and API manuals into interactive, runnable system diagrams and live sandboxes.*
 
-First, run the development server:
+---
+
+## 🌟 Why DocuMorph?
+
+Technical specifications and architecture PDFs are typically passive, dense, and disconnected from runtime reality:
+1. **Developers scan without grasping architecture:** Complex data flows and event backbones get buried in paragraphs of text.
+2. **Disconnected testing:** Developers copy-paste cURL commands or endpoints back and forth into external tools (Postman, terminal).
+3. **Static diagrams:** Architecture figures in markdown are dead pixels—you cannot click a microservice node to see its schema or live endpoint status.
+
+**DocuMorph** bridges documentation and runtime execution into a single unified workspace.
+
+---
+
+## 🚀 Key Features
+
+- **Living Architecture Canvas:** Powered by `@xyflow/react` (React Flow), rendering custom microservice nodes with real-time health indicators, latency metrics, and SLA badges.
+- **Interactive Node Inspector:** Click any service node to view its technical stack, upstream/downstream dependencies, and exposed API endpoints.
+- **In-Browser Living API Sandbox:** Built-in payload editor with Monaco Editor support and instant simulated packet traversal across the architecture graph.
+- **Real-Time Trace Stream:** Visual event log tracking packet movements, latency benchmarks, and status codes across microservices.
+- **Multimodal Technical Co-Pilot:** Context-aware AI assistant focused on the active architecture spec, offering failover strategies and latency optimizations.
+- **Spec Ingestion Engine:** Upload custom OpenAPI / Markdown specs to synthesize living architecture graphs on the fly.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 16 (App Router, Turbopack, React 19)
+- **Styling:** Tailwind CSS v4, Lucide Icons
+- **Visuals & Graphs:** `@xyflow/react` (React Flow)
+- **Editor:** `@monaco-editor/react`
+- **State Management:** Zustand
+- **Package Manager:** pnpm
+
+---
+
+## 🏁 Quickstart
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 1. Clone or navigate to the project directory
+cd /Users/swagatsouravdhar/.gemini/antigravity/scratch/documorph
+
+# 2. Install dependencies (if not already installed)
+pnpm install
+
+# 3. Start the development server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) with your browser to experience DocuMorph.
