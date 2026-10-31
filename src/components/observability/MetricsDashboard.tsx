@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useDocuMorphStore } from '@/store/useDocuMorphStore';
+import { Card3DTilt } from '@/components/ui/Card3DTilt';
 import {
   Activity,
   BarChart3,
@@ -71,40 +72,40 @@ export const MetricsDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* KPI Stats Row (Grafana Big Stat Cards) */}
+      {/* KPI Stats Row (Grafana Big Stat Cards with 3D Tilt & Specular Shine) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {/* Card 1: RPS */}
-        <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 relative overflow-hidden">
+        <Card3DTilt className="bg-slate-900/90 border border-slate-800 p-3.5" maxTilt={8}>
           <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
             <span>Throughput</span>
             <Activity className="w-4 h-4 text-sky-400" />
           </div>
           <div className="text-2xl font-bold font-mono text-slate-100">1,482 <span className="text-xs text-slate-400 font-normal">req/s</span></div>
           <div className="text-[11px] text-emerald-400 mt-1 font-mono">↑ 4.2% vs last 15m</div>
-        </div>
+        </Card3DTilt>
 
         {/* Card 2: P95 Latency */}
-        <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 relative overflow-hidden">
+        <Card3DTilt className="bg-slate-900/90 border border-slate-800 p-3.5" maxTilt={8}>
           <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
             <span>P95 Latency</span>
             <Clock className="w-4 h-4 text-amber-400" />
           </div>
           <div className="text-2xl font-bold font-mono text-amber-400">22.4 <span className="text-xs text-slate-400 font-normal">ms</span></div>
           <div className="text-[11px] text-slate-400 mt-1 font-mono">P99: 46.8ms</div>
-        </div>
+        </Card3DTilt>
 
         {/* Card 3: Error Rate */}
-        <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 relative overflow-hidden">
+        <Card3DTilt className="bg-slate-900/90 border border-slate-800 p-3.5" maxTilt={8}>
           <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
             <span>Error Rate</span>
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
           </div>
           <div className="text-2xl font-bold font-mono text-emerald-400">0.008<span className="text-xs text-slate-400 font-normal">%</span></div>
           <div className="text-[11px] text-emerald-400 mt-1 font-mono">100% within SLA</div>
-        </div>
+        </Card3DTilt>
 
         {/* Card 4: Microservices */}
-        <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 relative overflow-hidden">
+        <Card3DTilt className="bg-slate-900/90 border border-slate-800 p-3.5" maxTilt={8}>
           <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
             <span>Nodes Status</span>
             <Cpu className="w-4 h-4 text-violet-400" />
@@ -113,7 +114,7 @@ export const MetricsDashboard: React.FC = () => {
             {activeTemplate.nodes.length} / {activeTemplate.nodes.length}
           </div>
           <div className="text-[11px] text-emerald-400 mt-1 font-mono">All Pods Healthy</div>
-        </div>
+        </Card3DTilt>
       </div>
 
       {/* Grafana Tempo Waterfall Trace Viewer */}

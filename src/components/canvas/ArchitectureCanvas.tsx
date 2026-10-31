@@ -29,6 +29,7 @@ import {
   Copy,
   Check,
   Send,
+  Box,
 } from 'lucide-react';
 
 const nodeTypes = {
@@ -45,6 +46,7 @@ export const ArchitectureCanvas: React.FC = () => {
     addEdgeConnection,
     generateWithAiPrompt,
     exportToMermaid,
+    setActiveTab,
   } = useDocuMorphStore();
 
   const [nodes, setNodes, onNodesChange] = useNodesState<CustomNodeType>(activeTemplate.nodes);
@@ -195,6 +197,16 @@ export const ArchitectureCanvas: React.FC = () => {
         >
           <Code2 className="w-3.5 h-3.5 text-indigo-400" />
           <span className="hidden sm:inline">Export Mermaid</span>
+        </button>
+
+        {/* 3D View Shortcut */}
+        <button
+          onClick={() => setActiveTab('hologram3d')}
+          className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-cyan-600/30 to-indigo-600/30 hover:from-cyan-600/50 hover:to-indigo-600/50 text-cyan-300 border border-cyan-500/40 transition shadow-sm"
+          title="Switch to Interactive 3D WebGL Hologram"
+        >
+          <Box className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+          <span className="hidden sm:inline">3D View</span>
         </button>
 
         <button
