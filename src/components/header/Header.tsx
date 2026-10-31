@@ -6,7 +6,6 @@ import {
   Layers,
   Upload,
   Play,
-  FileCode,
   FileText,
   Bot,
   Sparkles,

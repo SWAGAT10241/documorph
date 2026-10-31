@@ -26,7 +26,7 @@ export interface ApiEndpoint {
     status: number;
     statusText: string;
     headers: Record<string, string>;
-    body: any;
+    body: unknown;
   };
 }
 

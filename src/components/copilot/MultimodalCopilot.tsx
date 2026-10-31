@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useDocuMorphStore } from '@/store/useDocuMorphStore';
-import { Bot, Send, Sparkles, Volume2, ShieldAlert, Cpu } from 'lucide-react';
+import { Bot, Send, Sparkles, ShieldAlert, Cpu } from 'lucide-react';
 
 interface ChatMessage {
   id: string;

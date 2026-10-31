@@ -14,12 +14,11 @@ import {
 } from '@xyflow/react';
 import { ServiceNode } from './ServiceNode';
 import { useDocuMorphStore } from '@/store/useDocuMorphStore';
-import { CustomNodeType, CustomEdgeType, NodeType } from '@/types/documorph';
+import { CustomNodeType, CustomEdgeType } from '@/types/documorph';
 import {
   Play,
   RotateCcw,
   Sparkles,
-  Plus,
   Layers,
   Server,
   Database,
@@ -39,8 +38,6 @@ const nodeTypes = {
 export const ArchitectureCanvas: React.FC = () => {
   const {
     activeTemplate,
-    selectedNode,
-    setSelectedNode,
     isSimulating,
     activeSimulatedEdgeId,
     runEndpointSimulation,

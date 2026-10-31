@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { useDocuMorphStore } from '@/store/useDocuMorphStore';
-import { FileText, Sparkles, RefreshCw } from 'lucide-react';
+import { FileText, Sparkles } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false });
 
 export const DocEditor: React.FC = () => {
-  const { markdownDoc, setMarkdownDoc, activeTemplate, setActiveTab } = useDocuMorphStore();
+  const { markdownDoc, setMarkdownDoc, setActiveTab } = useDocuMorphStore();
 
   return (
     <div className="flex flex-col h-full bg-slate-950 p-4 space-y-3">

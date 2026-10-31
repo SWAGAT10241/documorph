@@ -9,7 +9,6 @@ import {
   Cpu,
   Layers,
   Play,
-  RotateCcw,
   ShieldCheck,
   Zap,
 } from 'lucide-react';
