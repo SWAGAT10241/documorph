@@ -1,0 +1,32 @@
+version: 2
+updates:
+  # Automated Dependency Management for npm / pnpm packages
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '04:00'
+      timezone: 'UTC'
+    open-pull-requests-limit: 10
+    labels:
+      - 'dependencies'
+      - 'automated-pr'
+    commit-message:
+      prefix: 'chore(deps)'
+      include: 'scope'
+    groups:
+      dependencies:
+        patterns:
+          - '*'
+
+  # Automated Dependency Management for GitHub Actions
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    labels:
+      - 'ci/cd'
+      - 'dependencies'
+    commit-message:
+      prefix: 'chore(ci)'
