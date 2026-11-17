@@ -18,7 +18,7 @@ documorph/
 ├── docs/                       # Project documentation & GitHub Wiki
 │   └── wiki/                   # Complete Wiki chapters
 ├── src/
-│   ├── app/                    # Next.js App Router segements
+│   ├── app/                    # Next.js App Router segments
 │   │   ├── api/v1/ingest/      # Rate-limited GitHub AST Ingestion API
 │   │   ├── layout.tsx          # Root layout & font definition
 │   │   └── page.tsx            # Main workspace viewport
