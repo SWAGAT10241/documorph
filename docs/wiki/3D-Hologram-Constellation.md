@@ -59,15 +59,15 @@ Glowing data packets continuously travel along the curves from source to target.
 
 ## 5. Raycasting & Holographic HUD
 
-Using Three.js `Raycaster`, hovering over any 3D node calculates the 2D screen coordinate projection:
-```ts
-const screenPosition = nodeVector.clone().project(camera);
-```
-A cyberpunk HUD appears above the hovered service showing:
-- Node type & operational status (pulsing emerald indicator).
-- P95 latency (e.g. `18ms`) & SLA uptime (e.g. `99.9%`).
-- Discovered tech stack pills.
-- Clicking the node focuses the camera and inspects its endpoints in the right-side Node Inspector.
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:8e2be139ce2a6cdb5602efce156764e4f8fb09ad7c7a44665ee5aa8507e3677b -->
+
+Three.js `Raycaster` identifies the hovered node. The HUD position uses `e.clientX - rect.left` and `e.clientY - rect.top`, relative to the canvas container. It shows the node type, status, label, description, P95 latency, and uptime SLA.
+
+Clicking a node selects it and, if it has endpoints, selects its first endpoint.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 ---
 

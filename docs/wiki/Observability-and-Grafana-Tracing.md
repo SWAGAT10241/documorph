@@ -8,14 +8,14 @@ DocuMorph incorporates a built-in **Grafana-Style Observability Dashboard**, all
 
 ```mermaid
 graph TD
-    A["Observability Dashboard"] --> B["Real-Time KPI Cards"]
+    A["Observability Dashboard"] --> B["Sample KPI Cards"]
     A --> C["Grafana Tempo Waterfall Trace Viewer"]
     A --> D["Service Resource & SLA Matrix"]
 
     B --> B1["Throughput: 1,482 req/s"]
     B --> B2["P95 Latency: 22.4 ms"]
     B --> B3["Error Rate: 0.008%"]
-    B --> B4["Pod Health: 100%"]
+    B --> B4["Nodes Status: Template Node Count"]
 
     C --> C1["Parent Span: Edge Gateway"]
     C --> C2["Child Span: Core Microservice"]
@@ -27,11 +27,17 @@ graph TD
 
 ## 2. Interactive 3D KPI Metric Cards
 
-The top metrics row renders key performance indicators formatted like Grafana Big Stat panels:
-- **Throughput (req/s)**: Real-time query volume with trend indicators.
-- **P95 Latency (ms)**: 95th percentile response latency compared against P99 bounds.
-- **Error Rate (%)**: Calculated HTTP 4xx/5xx frequency against SLA thresholds.
-- **Service Mesh Pods**: Active pods count and overall health status.
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:f6cbcb870909166791777f8ef0025fc7c66bb539e099d5166c7ebbb010aafdef -->
+
+The top metrics row in `MetricsDashboard` displays sample values, not live telemetry:
+- **Throughput:** 1,482 req/s.
+- **P95 latency:** 22.4 ms, with P99 shown as 46.8 ms.
+- **Error rate:** 0.008%.
+- **Nodes status:** The active template's node count is shown as both numerator and denominator, alongside a fixed “All Pods Healthy” label.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 ### 3D Perspective Tilt Interactivity
 Every KPI card is wrapped in the [`Card3DTilt`](../../src/components/ui/Card3DTilt.tsx) component:
