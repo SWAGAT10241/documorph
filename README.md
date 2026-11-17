@@ -13,6 +13,22 @@
 
 ---
 
+## 📸 Visual Showcase & Interactive Demos
+
+| 🌌 3D WebGL Hologram Constellation | 🗺️ Living 2D Architecture Canvas |
+|:---:|:---:|
+| ![3D Hologram Constellation](docs/screenshots/01-3d-hologram-constellation.png) | ![2D Architecture Canvas](docs/screenshots/02-2d-living-architecture.png) |
+
+| 🔗 Enterprise Code Link Ingestor | 🎮 Living API Sandbox |
+|:---:|:---:|
+| ![Code Link Ingestion Modal](docs/screenshots/05-code-link-ingestor.png) | ![Living API Sandbox](docs/screenshots/03-living-api-sandbox.png) |
+
+| 📊 Grafana Observability Dashboard |
+|:---:|
+| ![Grafana Metrics Modal](docs/screenshots/04-grafana-metrics.png) |
+
+---
+
 ## 🌟 Why DocuMorph?
 
 Technical specifications and architecture PDFs are typically passive, dense, and disconnected from runtime reality:
